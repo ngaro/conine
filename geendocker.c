@@ -18,7 +18,7 @@ int main(int argc, char** argv) {
 		return EXIT_FAILURE;
 	}
 	if(strcmp(argv[1], "--") != 0) {
-		fprintf(stderr, GEENSTREEPJES);
+		fprintf(stderr, GEENSTREEPJES, argv[1]);
 		return EXIT_FAILURE;
 	}
 	execl(GEENDOCKERSHELL, GEENDOCKERSHELL, (char*) NULL);
