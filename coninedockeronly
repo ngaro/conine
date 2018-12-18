@@ -44,19 +44,24 @@ halt
 ### 5) onnodige services niet meer opstarten
 in /etc/inittab de lijnen beginnend met tty[2-6] commenten en de lijnen met ttyS0 commenten (bij de laatst is dit nog niet gebeurd) #zet alle terminals uit behalve de 1ste
 docker start temp-sshd
-vanop ander systeem: scp daemonsuit.sh root@192.168.56.2:/root
-/root/daemonsuit.sh && rm /root/daemonsuit.sh #acpid, crond, syslog en klogd niet meer laten opstarten (errors zijn er want niet alles is overal)
+vanop ander systeem: scp daemonsuit.sh root@192.168.56.2:
+./daemonsuit.sh && rm ./daemonsuit.sh #acpid, crond, syslog en klogd niet meer laten opstarten (errors zijn er want niet alles is overal)
 docker stop temp-sshd
 halt
 
 ### 6) een compileerimage maken
 docker start temp-sshd
-vanop ander systeem: scp DockerfileCOMPILEER root@192.168.56.2:/root/Dockerfile
+vanop ander systeem: scp DockerfileCOMPILEER root@192.168.56.2:Dockerfile
 docker build -t compileerimg . && rm Dockerfile
 docker stop temp-sshd
 halt
 
-### 6) met onbestaande user 'geendocker' een niet-container shell maken
+### 7) met onbestaande user 'geendocker' een niet-container shell maken
+docker start temp-sshd
+vanop ander systeem: scp geendocker.c root@192.168.56.2:
+docker run -v /root:/root --rm -ti compileerimg
+docker stop temp-sshd
+halt
 #DEBUG
 docker run -ti --name compileer compileerimg
 een main.c maken met 1 van de volgende inhouden
