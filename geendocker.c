@@ -1,7 +1,7 @@
 #include <stdio.h>	//fprintf
-#include <unistd.h>	//execl
 #include <stdlib.h>	//EXIT_FAILURE
-//#include <string.h>	//strcmp
+#include <string.h>	//strcmp
+#include <unistd.h>	//execl
 
 //#define	GEENDOCKER	"geendocker"
 #define GEENDOCKERSHELL	"/bin/ash"
@@ -17,7 +17,7 @@ int main(int argc, char** argv) {
 		}
 		return EXIT_FAILURE;
 	}
-	if(strcmp(argv[1],"--") != 0) {
+	if(strcmp(argv[1], "--") != 0) {
 		fprintf(stderr, GEENSTREEPJES);
 		return EXIT_FAILURE;
 	}
