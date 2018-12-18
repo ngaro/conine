@@ -34,16 +34,14 @@ vi /etc/apk/repositories
 #de community lijn uncommenten
 apk update
 apk add docker && rc-update add docker boot
+docker run -v /root:/root -d -p 22:22 --name ssh-server rastasheep/ubuntu-sshd
+#docker stop ssh-server #doen juist voor reboot/halts
 halt
-
-### 4) tijdelijke ssh-server voor de rest van de installatie
-docker run --rm -v /root:/root -d -p 22:22 --name ssh-server rastasheep/ubuntu-sshd
-docker stop ssh-server #doen juist voor reboot/halts
 
 ### 5) onnodige services uitzetten
 in /etc/inittab de lijnen beginnend met tty[2-6] commenten en de lijnen met ttyS0 commenten (bij de laatst is dit nog niet gebeurd) #zet alle terminals uit behalve de 1ste
 vanop ander systeem: scp daemonsuit.sh root@192.168.56.2:/root
-vanop conine : /root/daemonsuit.sh #acpid, crond, syslog en klogd niet meer laten opstarten
+vanop conine : /root/daemonsuit.sh && rm /root/daemonsuit.sh #acpid, crond, syslog en klogd niet meer laten opstarten
 
 ### 6) met onbestaande user 'geendocker' een niet-container shell maken
 een main.c maken met 1 van de volgende inhouden
