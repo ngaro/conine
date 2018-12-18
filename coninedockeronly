@@ -34,8 +34,11 @@ vi /etc/apk/repositories
 #de community lijn uncommenten
 apk update
 apk add docker && rc-update add docker boot
-docker run -v /root:/root -d -p 22:22 --name ssh-server rastasheep/ubuntu-sshd
-#docker stop ssh-server #doen juist voor reboot/halts
+halt
+
+### 4) tijdelijk ssh server
+docker run -v /root:/root -d -p 22:22 --name temp-sshd rastasheep/ubuntu-sshd && docker exec -ti temp-sshd passwd
+docker stop temp-sshd
 halt
 
 ### 5) onnodige services uitzetten
