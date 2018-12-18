@@ -1,6 +1,6 @@
 ### 1) vbox config ###
-linux 4.x 64b, 2GB, geen floppy, default cdboot, utc tijd, geen remote display,
-alpine-virt-3.8.1 64, adapter 1 = nat , mac 080027CF621D, adapter 2 = host-only, 08002755E125
+vmconine, linux 4.x 64b, 2GB, 32GB VDI, geen floppy, default cdboot, utc tijd, geen remote display,
+alpine-virt-3.8.1 64, eth:natnet1, mac 080027AE3A2A, eth1:vboxnet0, 0800273A3456
 
 ### 2) installatie ### nodig: 1
 inloggen als root zonder pass en de volgende keyboard input
@@ -33,6 +33,10 @@ apk update
 apk add docker
 rc-update add docker boot	#docker starten bij het booten
 halt
+
+DEBUG
+### 3.1) tijdelijke ssh-server voor de rest van de installatie ### nodig: 2
+docker run -v /root:/root -d -p 22:22 --name ssh-server rastasheep/ubuntu-sshd
 
 ### 4) onnodige services uitzetten: nodig 2
 in /etc/inittab de lijnen beginnend met tty[2-6] commenten en de lijnen met ttyS0 commenten (bij de laatst is dit nog niet gebeurd) #alle terminals uitzetten behalve de 1ste
@@ -70,6 +74,27 @@ int main(int argc, char** argv) {
 	execl("/bin/ash", "/bin/ash", (char*) NULL);
 	return EXIT_FAILURE;
 }
+
+//BEGIN correct
+#include <stdlib.h>	//EXIT_FAILURE
+#include <stdio.h>	//sprintf
+#include <string.h>	//strcmp
+#include <unistd.h>	//execl
+
+#define	GEENDOCKER	"geendocker"
+#define GEENDOCKERSHELL	"/bin/ash"
+#define TEWEINIGARGS	"FOUT: Te weinig argument meegekregen:\n"
+#define ARGINHOUD	"argv[%d] = |%s|\n"	//%d is argnr, %s is arginhoud
+
+int main(int argc, char** argv) {
+	if(argc
+	for(int i=0; i < argc; i++) {
+		printf("|%s|\n", argv[i]);
+	}
+	execl("/bin/ash", "/bin/ash", (char*) NULL);
+	return EXIT_FAILURE;
+}
+
 //EINDE
 
 apk add gcc musl-dev && gcc main.c -Wall -Werror -Os -o /bin/login
