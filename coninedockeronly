@@ -50,6 +50,13 @@ docker stop temp-sshd
 halt
 
 ### 6) met onbestaande user 'geendocker' een niet-container shell maken
+docker start temp-sshd
+vanop ander systeem: scp DockerfileCOMPILEER root@192.168.56.2:/root/Dockerfile && ssh root@192.168.56.2
+docker build -t compileerimg . && docker run -ti --name compileer compileerimg
+vanop de container tot het exit commando:
+docker stop temp-sshd
+halt
+#DEBUG
 een main.c maken met 1 van de volgende inhouden
 //BEGIN met docker
 #include <stdlib.h> //EXIT_FAILURE
