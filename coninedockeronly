@@ -2,7 +2,7 @@
 vmconine, linux 4.x 64b, 2GB, 32GB VDI, geen floppy, default cdboot, utc tijd, geen remote display,
 alpine-virt-3.8.1 64, eth:natnet1, mac 080027AE3A2A, eth1:vboxnet0, 0800273A3456
 
-### 2) installatie ### nodig: 1
+### 2) installatie
 inloggen als root zonder pass en de volgende keyboard input
 setup-alpine #standaard installatie
 us	#toetsenbord
@@ -29,20 +29,20 @@ sys	#schijfgebruik
 y
 halt #setup is klaar, afsluiten
 
-### 3) docker installatie ### nodig: 2
+### 3) docker installatie
 vi /etc/apk/repositories
 #de community lijn uncommenten
 apk update
 apk add docker && rc-update add docker boot
 halt
 
-DEBUG
-### 3.1) tijdelijke ssh-server voor de rest van de installatie ### nodig: 2
+### 4) tijdelijke ssh-server voor de rest van de installatie
 docker run --rm -v /root:/root -d -p 22:22 --name ssh-server rastasheep/ubuntu-sshd
 
-### 4) onnodige services uitzetten: nodig 2
-in /etc/inittab de lijnen beginnend met tty[2-6] commenten en de lijnen met ttyS0 commenten (bij de laatst is dit nog niet gebeurd) #alle terminals uitzetten behalve de 1ste
-for a in /etc/init.d /etc/runlevels/* ; do for b in acpid crond klogd syslog ; do rm $a/$b ; done ; done #acpid, crond, syslog en klogd niet meer laten opstarten
+### 5) onnodige services uitzetten: nodig 2
+in /etc/inittab de lijnen beginnend met tty[2-6] commenten en de lijnen met ttyS0 commenten (bij de laatst is dit nog niet gebeurd) #zet alle terminals uit behalve de 1ste
+vanop ander systeem: scp daemonsuit.sh root@192.168.56.2:/root
+vanop conine : /root/daemonsuit.sh #acpid, crond, syslog en klogd niet meer laten opstarten
 
 ### 4.1) login niet meer opstarten ### nodig: 1 en "apk update"
 een main.c maken met 1 van de volgende inhouden
