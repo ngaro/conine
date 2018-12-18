@@ -45,18 +45,20 @@ halt
 in /etc/inittab de lijnen beginnend met tty[2-6] commenten en de lijnen met ttyS0 commenten (bij de laatst is dit nog niet gebeurd) #zet alle terminals uit behalve de 1ste
 docker start temp-sshd
 vanop ander systeem: scp daemonsuit.sh root@192.168.56.2:/root
-vanop conine : /root/daemonsuit.sh && rm /root/daemonsuit.sh #acpid, crond, syslog en klogd niet meer laten opstarten (errors zijn er want niet alles is overal)
+/root/daemonsuit.sh && rm /root/daemonsuit.sh #acpid, crond, syslog en klogd niet meer laten opstarten (errors zijn er want niet alles is overal)
+docker stop temp-sshd
+halt
+
+### 6) een compileerimage maken
+docker start temp-sshd
+vanop ander systeem: scp DockerfileCOMPILEER root@192.168.56.2:/root/Dockerfile
+docker build -t compileerimg . && rm Dockerfile
 docker stop temp-sshd
 halt
 
 ### 6) met onbestaande user 'geendocker' een niet-container shell maken
-docker start temp-sshd
-vanop ander systeem: scp DockerfileCOMPILEER root@192.168.56.2:/root/Dockerfile && ssh root@192.168.56.2
-docker build -t compileerimg . && docker run -ti --name compileer compileerimg
-vanop de container tot het exit commando:
-docker stop temp-sshd
-halt
 #DEBUG
+docker run -ti --name compileer compileerimg
 een main.c maken met 1 van de volgende inhouden
 //BEGIN met docker
 #include <stdlib.h> //EXIT_FAILURE
