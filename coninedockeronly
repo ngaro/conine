@@ -29,6 +29,7 @@ sda	#schijf
 sys	#schijfgebruik
 y
 halt #setup is klaar, afsluiten
+#cd uithalen
 
 ### 3) docker installatie
 vi /etc/apk/repositories
