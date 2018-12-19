@@ -8,8 +8,8 @@
 #define GEENSTREEPJES	"Het 1ste argument is niet '--' maar '%s'\n"
 #define GEENDOCKER	"geendocker"
 #define ORIGLOGIN	"/bin/ash"
-#define DOCKERLOGIN	"/bin/echo"
-#define DOCKERLOGINARGS	"### dit is docker only ###"
+#define DOCKERLOGIN	"/usr/bin/docker"
+#define DOCKERLOGINARGS	"run --rm -ti --name conthoofd -v /var/run/docker.sock:/var/run/docker.sock ubuntu"
 
 int main(int argc, char** argv) {
 	if(argc < 3) {

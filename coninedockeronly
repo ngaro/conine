@@ -64,6 +64,3 @@ vanop ander systeem: scp geendocker.c maak_bin_login.sh root@192.168.56.2:/root/
 /root/maak_bin_login.sh
 docker stop temp-sshd
 halt
-
-#DEBUG BEZIG
-execl("/usr/bin/docker", "/usr/bin/docker", "run", "--rm", "-ti", "--name", "conthoofd", "-v", "/var/run/docker.sock:/var/run/docker.sock", "ubuntu", (char*) NULL);
