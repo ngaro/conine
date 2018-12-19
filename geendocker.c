@@ -3,12 +3,12 @@
 #include <string.h>	//strcmp
 #include <unistd.h>	//execl
 
-#define	GEENDOCKER	"geendocker"
-#define GEENDOCKERSHELL	"/bin/ash"
-#define ORIGINELELOGIN	"/bin/login_ORIG"
 #define TEWEINIGARGS	"FOUT: Incorrect aantal argumenten meegekregen, de verwachte waren '/bin/login', '--', username. Maar we kregen :\n"
-#define GEENSTREEPJES	"Het 1ste argument is niet '--' maar '%s'\n"
 #define ARGINHOUD	"argv[%d]: '%s'\n"	//%d is argnr, %s is arginhoud
+#define GEENSTREEPJES	"Het 1ste argument is niet '--' maar '%s'\n"
+#define GEENDOCKER	"geendocker"
+#define ORIGINELELOGIN	"/bin/login_ORIG"
+#define DOCKERLOGIN	"/bin/ash"
 
 int main(int argc, char** argv) {
 	if(argc < 3) {
@@ -21,7 +21,7 @@ int main(int argc, char** argv) {
 	} else if(strcmp(argv[2], GEENDOCKER) != 0) {
 		execl(ORIGINELELOGIN, ORIGINELELOGIN, (char*) NULL);
 	} else {
-		execl(GEENDOCKERSHELL, GEENDOCKERSHELL, (char*) NULL);
+		execl(DOCKERLOGIN, DOCKERLOGIN, (char*) NULL);
 	}
 	return EXIT_FAILURE;
 }
