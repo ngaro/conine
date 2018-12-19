@@ -7,8 +7,7 @@
 #define ARGINHOUD	"argv[%d]: '%s'\n"	//%d is argnr, %s is arginhoud
 #define GEENSTREEPJES	"Het 1ste argument is niet '--' maar '%s'\n"
 #define GEENDOCKER	"geendocker"
-#define ORIGLOGIN	"/bin/echo"
-#define ORIGLOGINARGS	"### dit is zonder docker ###"
+#define ORIGLOGIN	"/bin/ash"
 #define DOCKERLOGIN	"/bin/echo"
 #define DOCKERLOGINARGS	"### dit is docker only ###"
 
@@ -20,8 +19,8 @@ int main(int argc, char** argv) {
 		}
 	} else if(strcmp(argv[1], "--") != 0) {
 		fprintf(stderr, GEENSTREEPJES, argv[1]);
-	} else if(strcmp(argv[2], GEENDOCKER) == 0) {
-		execl(ORIGLOGIN, ORIGLOGIN, ORIGLOGINARGS, (char*) NULL);
+	} else if(strcmp(argv[2], GEENDOCKER) == 0) {	//TODO spaties voor en achter argv[2] wissen
+		execl(ORIGLOGIN, ORIGLOGIN, (char*) NULL);
 	} else {
 		execl(DOCKERLOGIN, DOCKERLOGIN, DOCKERLOGINARGS, (char*) NULL);
 	}
