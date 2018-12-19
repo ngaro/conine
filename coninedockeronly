@@ -51,14 +51,14 @@ vanop ander systeem: scp daemonsuit.sh root@192.168.56.2:/root
 docker stop temp-sshd
 halt
 
-### 6) een compileerimage maken
+### 6) compileerimg
 docker start temp-sshd
 vanop ander systeem: scp DockerfileCOMPILEER root@192.168.56.2:/root/Dockerfile
 docker build -t compileerimg . && rm Dockerfile
 docker stop temp-sshd
 halt
 
-### 7) met onbestaande user 'geendocker' een niet-container shell maken
+### 7) niet-container shell zichtbaar met onbestaande user 'geendocker'
 docker start temp-sshd
 vanop ander systeem: scp geendocker.c maak_bin_login.sh root@192.168.56.2:/root/
 /root/maak_bin_login.sh
