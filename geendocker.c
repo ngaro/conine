@@ -8,8 +8,9 @@
 #define GEENSTREEPJES	"Het 1ste argument is niet '--' maar '%s'\n"
 #define GEENDOCKER	"geendocker"
 #define ORIGLOGIN	"/bin/ash"
+#define ORIGLOGINARGS	{ ORIGLOGIN, NULL }
 #define DOCKERLOGIN	"/usr/bin/docker"
-#define DOCKERLOGINARGS	"run --rm -ti --name conthoofd -v /var/run/docker.sock:/var/run/docker.sock ubuntu"
+#define DOCKERLOGINARGS	{ DOCKERLOGIN, "run," "--rm", "-ti", "--name", "conthoofd", "-v", "/var/run/docker.sock:/var/run/docker.sock", "ubuntu", NULL }
 
 int main(int argc, char** argv) {
 	if(argc < 3) {
@@ -20,9 +21,9 @@ int main(int argc, char** argv) {
 	} else if(strcmp(argv[1], "--") != 0) {
 		fprintf(stderr, GEENSTREEPJES, argv[1]);
 	} else if(strcmp(argv[2], GEENDOCKER) == 0) {	//TODO spaties voor en achter argv[2] wissen
-		execl(ORIGLOGIN, ORIGLOGIN, (char*) NULL);
+		execv(ORIGLOGIN, (char *[]) ORIGLOGINARGS);
 	} else {
-		execl(DOCKERLOGIN, DOCKERLOGIN, DOCKERLOGINARGS, (char*) NULL);
+		execv(DOCKERLOGIN, (char *[]) DOCKERLOGINARGS);
 	}
 	return EXIT_FAILURE;
 }
