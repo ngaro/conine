@@ -64,66 +64,6 @@ vanop ander systeem: scp geendocker.c maak_bin_login.sh root@192.168.56.2:/root/
 /root/maak_bin_login.sh
 docker stop temp-sshd
 halt
-#DEBUG
-docker run -ti --name compileer compileerimg
-een main.c maken met 1 van de volgende inhouden
-//BEGIN met docker
-#include <stdlib.h> //EXIT_FAILURE
-#include <unistd.h> //execl
 
-int main(int argc, char** argv) {
-	execl("/usr/bin/docker", "/usr/bin/docker", "run", "--rm", "-ti", "--name", "conthoofd", "-v", "/var/run/docker.sock:/var/run/docker.sock", "ubuntu", (char*) NULL);
-	return EXIT_FAILURE;
-}
-
-//BEGIN met ash
-#include <stdlib.h> //EXIT_FAILURE
-#include <stdio.h>  //printf
-#include <unistd.h> //execl
-
-int main(int argc, char** argv) {
-	for(int i=0; i < argc; i++) {
-		printf("|%s|\n", argv[i]);
-	}
-	execl("/bin/ash", "/bin/ash", (char*) NULL);
-	return EXIT_FAILURE;
-}
-
-//BEGIN met enkel ash
-#include <stdlib.h> //EXIT_FAILURE
-#include <unistd.h> //execl
-
-int main(int argc, char** argv) {
-	execl("/bin/ash", "/bin/ash", (char*) NULL);
-	return EXIT_FAILURE;
-}
-
-//BEGIN correct
-#include <stdlib.h>	//EXIT_FAILURE
-#include <stdio.h>	//sprintf
-#include <string.h>	//strcmp
-#include <unistd.h>	//execl
-
-#define	GEENDOCKER	"geendocker"
-#define GEENDOCKERSHELL	"/bin/ash"
-#define TEWEINIGARGS	"FOUT: Te weinig argument meegekregen:\n"
-#define ARGINHOUD	"argv[%d] = |%s|\n"	//%d is argnr, %s is arginhoud
-
-int main(int argc, char** argv) {
-	if(argc
-	for(int i=0; i < argc; i++) {
-		printf("|%s|\n", argv[i]);
-	}
-	execl("/bin/ash", "/bin/ash", (char*) NULL);
-	return EXIT_FAILURE;
-}
-
-//EINDE
-
-apk add gcc musl-dev && gcc main.c -Wall -Werror -Os -o /bin/login
-# nu wordt opgestart:
-#1 /sbin/init
-#	/usr/bin/dockerd -p /run/docker.pid
-#		docker-containerd --config /var/run/docker/containerd/containerd.toml
-#	/bin/ash
-
+#DEBUG BEZIG
+execl("/usr/bin/docker", "/usr/bin/docker", "run", "--rm", "-ti", "--name", "conthoofd", "-v", "/var/run/docker.sock:/var/run/docker.sock", "ubuntu", (char*) NULL);
