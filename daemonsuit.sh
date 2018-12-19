@@ -4,3 +4,4 @@ for a in /etc/init.d /etc/runlevels/* ; do
 		rm $a/$b
 	done
 done
+rm /root/daemonsuit.sh

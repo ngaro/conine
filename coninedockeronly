@@ -1,6 +1,7 @@
 ### 1) vbox config ###
 vmconine, linux 4.x 64b, 2GB, 32GB VDI, geen floppy, default cdboot, utc tijd, geen remote display,
 alpine-virt-3.8.1 64, eth:natnet1, mac 080027AE3A2A, eth1:vboxnet0, 0800273A3456
+VBoxManage natnetwork add --netname natnet1 --network "192.168.15.0/24" --enable --dhcp off
 
 ### 2) installatie
 inloggen als root zonder pass en de volgende keyboard input
@@ -45,7 +46,7 @@ halt
 in /etc/inittab de lijnen beginnend met tty[2-6] commenten en de lijnen met ttyS0 commenten (bij de laatst is dit nog niet gebeurd) #zet alle terminals uit behalve de 1ste
 docker start temp-sshd
 vanop ander systeem: scp daemonsuit.sh root@192.168.56.2:/root
-/root/daemonsuit.sh && rm /root/daemonsuit.sh #acpid, crond, syslog en klogd niet meer laten opstarten (errors zijn er want niet alles is overal)
+/root/daemonsuit.sh #acpid, crond, syslog en klogd niet meer laten opstarten (errors zijn er want niet alles is overal)
 docker stop temp-sshd
 halt
 
@@ -59,7 +60,7 @@ halt
 ### 7) met onbestaande user 'geendocker' een niet-container shell maken
 docker start temp-sshd
 vanop ander systeem: scp geendocker.c maak_bin_login.sh root@192.168.56.2:/root/
-/root/maak_bin_login.sh && rm /root/maak_bin_login.sh
+/root/maak_bin_login.sh
 docker stop temp-sshd
 halt
 #DEBUG
