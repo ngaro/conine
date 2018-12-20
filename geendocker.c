@@ -20,9 +20,9 @@ int main(int argc, char** argv) {
 		}
 	} else if(strcmp(argv[1], "--") != 0) {
 		fprintf(stderr, GEENSTREEPJES, argv[1]);
-	} else if(strcmp(argv[2], GEENDOCKER) == 0) {	//TODO spaties voor en achter argv[2] wissen
+	} else if(strcmp(argv[2], GEENDOCKER) == 0) {	//TODO user en wachtwoord vragen en hem laten inloggen met de juiste env
 		execv(ORIGLOGIN, (char *[]) ORIGLOGINARGS);
-	} else {
+	} else {	//TODO wachtwoord vragen, checken of de user in de docker group zit en de container als hem opstarten, root mag alles
 		execv(DOCKERLOGIN, (char *[]) DOCKERLOGINARGS);
 	}
 	return EXIT_FAILURE;
