@@ -7,7 +7,8 @@
 #define ARGINHOUD	"argv[%d]: '%s'\n"	//%d is argnr, %s is arginhoud
 #define GEENSTREEPJES	"Het 1ste argument is niet '--' maar '%s'\n"
 #define GEENDOCKER	"geendocker"
-#define ORIGLOGIN	"/bin/ash"
+#define ORIGLOGIN	"/bin/replaced/login"
+#define GEENDOCKERMELD	"### U kan nu inloggen in het systeem zonder opgesloten te zitten in docker ###\n"
 #define ORIGLOGINARGS	{ ORIGLOGIN, NULL }
 #define DOCKERLOGIN	"/usr/bin/docker"
 #define DOCKERLOGINARGS	{ DOCKERLOGIN, "run", "--rm", "-ti", "--name", "conthoofd", "-v", "/var/run/docker.sock:/var/run/docker.sock", "ubuntu", NULL }
@@ -21,6 +22,7 @@ int main(int argc, char** argv) {
 	} else if(strcmp(argv[1], "--") != 0) {
 		fprintf(stderr, GEENSTREEPJES, argv[1]);
 	} else if(strcmp(argv[2], GEENDOCKER) == 0) {	//TODO user en wachtwoord vragen en hem laten inloggen met de juiste env
+		fprintf(stderr, GEENDOCKERMELD);
 		execv(ORIGLOGIN, (char *[]) ORIGLOGINARGS);
 	} else {	//TODO wachtwoord vragen, checken of de user in de docker group zit en de container als hem opstarten, root mag alles
 		execv(DOCKERLOGIN, (char *[]) DOCKERLOGINARGS);

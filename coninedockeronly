@@ -58,9 +58,12 @@ docker build -t compileerimg . && rm Dockerfile
 docker stop temp-sshd
 halt
 
-### 7) niet-container shell zichtbaar met onbestaande user 'geendocker'
+### 7) geendocker-support
 docker start temp-sshd
 vanop ander systeem: scp geendocker.c maak_bin_login.sh root@192.168.56.2:/root/
 /root/maak_bin_login.sh
 docker stop temp-sshd
 halt
+
+### 8) einde
+docker rm temp-sshd
