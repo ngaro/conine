@@ -11,7 +11,7 @@
 #define GEENDOCKERMELD	"### U kan nu inloggen in het systeem zonder opgesloten te zitten in docker ###\n"
 #define ORIGLOGINARGS	{ ORIGLOGIN, NULL }
 #define DOCKERLOGIN	"/usr/bin/docker"
-#define DOCKERLOGINARGS	{ DOCKERLOGIN, "run", "--rm", "-ti", "--name", "conthoofd", "-v", "/var/run/docker.sock:/var/run/docker.sock", "ubuntu", NULL }
+#define DOCKERLOGINARGS	{ DOCKERLOGIN, "run", "--rm", "-ti", "--name", "conthoofd", "-v", "/var/run/docker.sock:/var/run/docker.sock", "alpine", NULL }
 
 int main(int argc, char** argv) {
 	if(argc < 3) {
