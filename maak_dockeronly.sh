@@ -1,4 +1,5 @@
 #!/bin/sh
-docker run -v /root:/root --rm compileerimg sh -c 'cd /root && gcc -Wall -Werror -Os -o geendocker geendocker.c && rm geendocker.c'
-mkdir /bin/replaced && mv /bin/login /bin/replaced/ && mv /root/geendocker /bin/login
-rm /root/maak_bin_login.sh
+docker run -v /root:/root --rm compileerimg sh -c 'cd /root && gcc -Wall -Werror -Os -o dockeronly dockeronly.c && rm dockeronly.c'
+echo "dockeronly:x:65533:65533:dockeronly:/:/bin/dockeronlylogin" >> /etc/passwd
+mv /root/dockeronly /bin/
+rm /root/maak_dockeronly.sh
