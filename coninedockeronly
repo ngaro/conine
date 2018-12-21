@@ -58,12 +58,12 @@ docker build -t compileerimg . && rm Dockerfile
 docker stop temp-sshd
 halt
 
-### 7) dockeronly-support
+### 7) dockeronly
 docker start temp-sshd
 vanop ander systeem: scp dockeronlylogin.c maak_dockeronly.sh root@192.168.56.2:/root/
 /root/maak_dockeronly.sh
 docker stop temp-sshd
 halt
 
-### 8) einde
+### inf-1) einde
 docker rm temp-sshd
