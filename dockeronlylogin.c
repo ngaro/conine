@@ -3,7 +3,7 @@
 #include <unistd.h>	//execv
 
 #define DOCKERLOGIN	"/usr/bin/docker"
-#define DOCKERLOGINARGS	{ DOCKERLOGIN, "run", "--rm", "-ti", "--name", "conthoofd", "-v", "/var/run/docker.sock:/var/run/docker.sock", "alpine", NULL }
+#define DOCKERLOGINARGS	{ DOCKERLOGIN, "run", "--rm", "-ti", "--name", "hoofd", "-v", "/var/run/docker.sock:/var/run/docker.sock", "alpine", NULL }
 
 int main(int argc, char** argv) {
 	//TODO zoveel mogelijk andere processen killen

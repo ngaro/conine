@@ -60,7 +60,7 @@ halt
 
 ### 7) dockeronly-support
 docker start temp-sshd
-vanop ander systeem: scp dockeronly.c maak_dockeronly.sh root@192.168.56.2:/root/
+vanop ander systeem: scp dockeronlylogin.c maak_dockeronly.sh root@192.168.56.2:/root/
 /root/maak_dockeronly.sh
 docker stop temp-sshd
 halt
